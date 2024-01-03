@@ -24,14 +24,14 @@ body {
   padding: 1.5rem;
   align-items: center;
   min-height: calc(100vh - 3rem);
-  width: 100%;
 }
 
 .content {
   display: flex;
   gap: 1.5rem;
   width: 90%;
-  height: 100%;
+  min-height: inherit;
+
   flex: 1; 
 }
 
@@ -149,7 +149,7 @@ body {
 
 .board-footer {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
  
   
   & .quantity-badge {
@@ -186,6 +186,9 @@ body {
 
     & .picking-card-info {
       padding: 1rem;
+      display: flex;
+      justify-content: center;
+      width: 100%;  
     }
 
     & .picking-card-info:nth-child(2) {
@@ -213,7 +216,7 @@ body {
 }
 
 .footer {
-  height: 100%;
+  min-height: inherit;
   max-width: fit-content;
   display: flex;
   flex-direction: column;
