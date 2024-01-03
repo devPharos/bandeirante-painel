@@ -1,12 +1,21 @@
-import { Clock, LayoutTemplate, ListChecks, MoveRight } from 'lucide-react'
+import {
+  AlertTriangle,
+  Clock,
+  LayoutTemplate,
+  ListChecks,
+  MoveRight,
+} from 'lucide-react'
 import logo from './assets/logo.png'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
+import axios from 'axios'
 
 export default function App() {
   const [date, setDate] = useState(format(new Date(), 'HH:mm'))
   const [requests, setRequests] = useState([])
   const [picking, setPicking] = useState([])
+  const [error, setError] = useState(false)
+  const cardsQuantity = 7
 
   const leftBoardData = [
     {
@@ -58,6 +67,30 @@ export default function App() {
       status: 'NaoIniciado',
       responsible: 'Jefferson Melo',
     },
+    {
+      code: '121156',
+      name: 'CENTRO REAL',
+      date: new Date(2023, 1, 12),
+      quantity: 46,
+      status: 'NaoIniciado',
+      responsible: 'Jefferson Melo',
+    },
+    {
+      code: '12521326',
+      name: 'CENTRO REAL',
+      date: new Date(2023, 1, 12),
+      quantity: 46,
+      status: 'NaoIniciado',
+      responsible: 'Jefferson Melo',
+    },
+    {
+      code: '1244456',
+      name: 'CENTRO REAL',
+      date: new Date(2023, 1, 12),
+      quantity: 46,
+      status: 'NaoIniciado',
+      responsible: 'Jefferson Melo',
+    },
   ]
   const rightBoardData = [
     {
@@ -84,6 +117,22 @@ export default function App() {
       setDate(actualDate)
       handleUpdateLeftBoard()
       handleUpdateRightBoard()
+
+      fetch('http://b8950b0f23c4.sn.mynetname.net:8085/rest/Painel', {
+        headers: {
+          'X-Token': '7adcdcec-a653-11ed-afa1-0242ac120002',
+        },
+      })
+        .then(() => {
+          setDate(actualDate)
+          handleUpdateLeftBoard()
+          handleUpdateRightBoard()
+          setError(false)
+        })
+        .catch((error) => {
+          console.log(error)
+          setError(true)
+        })
     }
 
     fetchDados()
@@ -105,7 +154,7 @@ export default function App() {
           <main className="board-content">
             {requests &&
               requests.map((request, index) => {
-                if (index <= 5) {
+                if (index <= cardsQuantity) {
                   return (
                     <div className="board-row" key={request.code}>
                       <section
@@ -156,10 +205,10 @@ export default function App() {
               })}
           </main>
 
-          {requests.length > 5 && (
+          {requests.length > cardsQuantity && (
             <div className="board-footer">
               <section className="quantity-badge">
-                <span>+{requests.length - 5}</span>
+                <span>+{requests.length - cardsQuantity}</span>
               </section>
             </div>
           )}
@@ -207,10 +256,16 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <section className="time">
-          <Clock />
-          <span className="time-info">{date}</span>
-        </section>
+        <div className="error-box">
+          <section className="time">
+            <Clock />
+            <span className="time-info">{date}</span>
+          </section>
+          <section className="error-div">
+            <AlertTriangle size={16} />
+            <span>Não sincronizado</span>
+          </section>
+        </div>
         <img src={logo} alt="logo" className="logo" />
       </footer>
     </div>

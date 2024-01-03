@@ -16,6 +16,8 @@ body {
   width: 100%;
   color: white;
   background-image: url("./assets/bg-painel.png"); 
+  background-repeat: no-repeat;
+  background-size: cover;
 } 
 
 .container {
@@ -224,13 +226,30 @@ body {
   padding: 0;
   margin: 0;
 
-  & .time {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  & .error-box {
+    & .time {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
-    font-size: 2.5rem;
-    font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 700;
+
+      & span:nth-child(3) {
+      font-size: 16px;
+      font-weight: 500;
+      }
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    & .error-div {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center
+    }
+    
   }
 
   & img {
