@@ -22,7 +22,7 @@ export default function App() {
       code: '123457',
       name: 'CENTRO REAL',
       date: new Date(2023, 1, 12),
-      quantity: 46,
+      quantity: 176,
       status: 'NaoIniciado',
       responsible: 'Jefferson Melo',
     },
@@ -127,7 +127,9 @@ export default function App() {
                             </span>
                           </div>
                         </div>
-                        <span className="card-quantity">45 CX.</span>
+                        <span className="card-quantity">
+                          {request.quantity} CX.
+                        </span>
                       </section>
 
                       <span
