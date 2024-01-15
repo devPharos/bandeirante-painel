@@ -6,9 +6,8 @@ import {
   MoveRight,
 } from 'lucide-react'
 import logo from './assets/logo.png'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
-import axios from 'axios'
 
 export default function App() {
   const [date, setDate] = useState(format(new Date(), 'HH:mm'))
@@ -17,106 +16,112 @@ export default function App() {
   const [error, setError] = useState(false)
   const cardsQuantity = 7
 
-  const leftBoardData = [
-    {
-      code: '123456',
-      name: 'CENTRO REAL',
-      date: new Date(),
-      quantity: 45,
-      status: 'Iniciado',
-      responsible: 'Jefferson Melo',
-      pct: 35,
-    },
-    {
-      code: '123457',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 176,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '123458',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '123459',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '12349',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '1256',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '121156',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '12521326',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-    {
-      code: '1244456',
-      name: 'CENTRO REAL',
-      date: new Date(2023, 1, 12),
-      quantity: 46,
-      status: 'NaoIniciado',
-      responsible: 'Jefferson Melo',
-    },
-  ]
-  const rightBoardData = [
-    {
-      leftCode: 'E6501',
-      mainCode: '7360081E',
-      rightCode: 'A2400',
-      leftData: 30,
-      rightData: 4,
-    },
-  ]
+  const leftBoardData = useMemo(
+    () => [
+      {
+        code: '123456',
+        name: 'CENTRO REAL',
+        date: new Date(),
+        quantity: 45,
+        status: 'Iniciado',
+        responsible: 'Jefferson Melo',
+        pct: 35,
+      },
+      {
+        code: '123457',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 176,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '123458',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '123459',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '12349',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '1256',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '121156',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '12521326',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+      {
+        code: '1244456',
+        name: 'CENTRO REAL',
+        date: new Date(2023, 1, 12),
+        quantity: 46,
+        status: 'NaoIniciado',
+        responsible: 'Jefferson Melo',
+      },
+    ],
+    [],
+  )
+  const rightBoardData = useMemo(
+    () => [
+      {
+        leftCode: 'E6501',
+        mainCode: '7360081E',
+        rightCode: 'A2400',
+        leftData: 30,
+        rightData: 4,
+      },
+    ],
+    [],
+  )
 
-  const handleUpdateLeftBoard = () => {
+  const handleUpdateLeftBoard = useCallback(() => {
     setRequests(leftBoardData)
-  }
+  }, [leftBoardData])
 
-  const handleUpdateRightBoard = () => {
+  const handleUpdateRightBoard = useCallback(() => {
     setPicking(rightBoardData)
-  }
+  }, [rightBoardData])
 
   useEffect(() => {
     const fetchDados = async () => {
       const actualDate = format(new Date(), 'HH:mm')
 
       setDate(actualDate)
-      handleUpdateLeftBoard()
-      handleUpdateRightBoard()
+      setRequests(leftBoardData)
+      setPicking(rightBoardData)
 
       fetch('http://b8950b0f23c4.sn.mynetname.net:8085/rest/Painel', {
         headers: {
@@ -140,7 +145,12 @@ export default function App() {
     const intervalId = setInterval(fetchDados, 15000)
 
     return () => clearInterval(intervalId)
-  }, [])
+  }, [
+    handleUpdateLeftBoard,
+    handleUpdateRightBoard,
+    leftBoardData,
+    rightBoardData,
+  ])
 
   return (
     <div className="container">
@@ -261,10 +271,12 @@ export default function App() {
             <Clock />
             <span className="time-info">{date}</span>
           </section>
-          <section className="error-div">
-            <AlertTriangle size={16} />
-            <span>Não sincronizado</span>
-          </section>
+          {error && (
+            <section className="error-div">
+              <AlertTriangle size={16} />
+              <span>Não sincronizado</span>
+            </section>
+          )}
         </div>
         <img src={logo} alt="logo" className="logo" />
       </footer>
