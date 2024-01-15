@@ -1,0 +1,258 @@
+:root {
+  --navy-blue: #253559;
+  --dark-blue: #0c3297;
+  --baby-blue: #7181b4;
+  --violet: #9889b0;
+  --white: #ffffff;
+  --gray-50: rgba(255, 255, 255, 0.25);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  color: white;
+  background-image: url("./assets/bg-painel.png"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+
+.container {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  align-items: center;
+  min-height: calc(100vh - 3rem);
+}
+
+.content {
+  display: flex;
+  gap: 1.5rem;
+  width: 90%;
+  min-height: inherit;
+
+  flex: 1; 
+}
+
+.board:first-child {
+  width: 70%;
+}
+
+.board {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.4px);
+  -webkit-backdrop-filter: blur(3.4px);
+  
+  padding: 1rem;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & .header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid var(--gray-50);
+
+    & .title {
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.board-row {
+  display: flex;
+  width: 100%; 
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.board-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+#board-card {
+  border: 2px solid var(--white);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  flex: 1;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  & .card-info-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+
+  & .card-info {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  & .card-quantity {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+}
+
+.to-do#board-card {
+  background-color: var(--white);
+  color: var(--navy-blue);
+}
+
+#badge {
+  width: 12.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+  border-radius: 30px;
+  font-size: 1.3rem;
+}
+
+.to-do#badge {
+  border: 2px solid var(--white);
+  font-weight: 500;
+}
+
+.in-progress#badge {
+  background-color: var(--navy-blue);
+  font-weight: 500;
+}
+
+.data {
+  width: 10%;
+  color: var(--navy-blue);
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: right;
+}
+
+.board-footer {
+  display: flex;
+  justify-content: flex-end;
+ 
+  
+  & .quantity-badge {
+    padding: 0.5rem;
+    background-color: var(--white);
+    width: fit-content;
+    color: var(--navy-blue);
+    border-radius: 8px;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+}
+
+.picking-card {
+  border-right: 2px solid var(--white);
+  border-left: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & header {
+    background-color: var(--white);
+    color: var(--navy-blue);
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+
+    & .picking-card-info {
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      width: 100%;  
+    }
+
+    & .picking-card-info:nth-child(2) {
+      background-color: var(--navy-blue);
+      color: var(--white);
+      border-radius: 16px;
+    }
+  }
+
+  & main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+
+    & .picking-card-info {
+      display: flex;
+      justify-content: center;
+      width: 100%;  
+
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.footer {
+  min-height: inherit;
+  max-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+
+  & .error-box {
+    & .time {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      font-size: 2.5rem;
+      font-weight: 700;
+
+      & span:nth-child(3) {
+      font-size: 16px;
+      font-weight: 500;
+      }
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    & .error-div {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center
+    }
+    
+  }
+
+  & img {
+    width: 8rem;
+  }
+}
